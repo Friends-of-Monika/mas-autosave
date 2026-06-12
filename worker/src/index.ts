@@ -8,6 +8,7 @@ interface VersionEntry {
   sha256: string;
   timestamp: string;
   size: number;
+  reason: string;
 }
 
 const MAX_VERSIONS = 20;
@@ -50,6 +51,8 @@ app.post("/saves/:hash/upload", async (c) => {
     return c.json({ error: "invalid hash" }, 400);
   }
 
+  const reason = c.req.query("reason") ?? "autosave";
+
   const body = await c.req.arrayBuffer();
   if (body.byteLength === 0) {
     return c.json({ error: "empty body" }, 400);
@@ -75,7 +78,7 @@ app.post("/saves/:hash/upload", async (c) => {
 
   // Deduplicate: re-upload of the same content moves it to the top
   index = index.filter((e) => e.sha256 !== sha256);
-  index.unshift({ sha256, timestamp: now, size: body.byteLength });
+  index.unshift({ sha256, timestamp: now, size: body.byteLength, reason });
 
   // Cap at MAX_VERSIONS and delete overflow
   const overflow = index.splice(MAX_VERSIONS);

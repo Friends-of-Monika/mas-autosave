@@ -31,12 +31,20 @@ init -898 python in _fom_autosave_http:
 
         def request(method, url, headers=None, body=None, timeout=10):
             with use_cert(SSL_CERT_FILE):
+                if isinstance(method, unicode):
+                    method = method.encode("ascii")
+                if isinstance(url, unicode):
+                    url = url.encode("ascii")
                 req = urllib2.Request(url, data=body)
                 req.get_method = lambda: method
 
                 if headers is None:
                     headers = {}
                 for k, v in headers.items():
+                    if isinstance(k, unicode):
+                        k = k.encode("ascii")
+                    if isinstance(v, unicode):
+                        v = v.encode("ascii")
                     req.add_header(k, v)
 
                 logger.debug("[http] {method} {url}".format(method=method, url=url))
@@ -47,10 +55,10 @@ init -898 python in _fom_autosave_http:
                     status = res.getcode()
                     res_body = res.read()
                 except HTTPError as e:
-                    logger.debug("[http] {method} {url} - {code}".format(method=method, url=url, code=e.code))
+                    logger.debug("[http] {0} {1} - {2} | {3}", method, url, e.code, repr(e.read()[:500]))
                     raise e
 
-                logger.debug("[http] {method} {url} - {code}".format(method=method, url=url, code=status))
+                logger.debug("[http] {0} {1} - {2}", method, url, status)
                 return status, res_body
 
         def urlencode(s):

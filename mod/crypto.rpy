@@ -64,7 +64,7 @@ init -998 python in _fom_autosave_crypto:
 
     def derive_key(seed_phrase):
         """Derive a 32-byte AES-256 key from a seed phrase via PBKDF2-HMAC-SHA256."""
-        return hashlib.pbkdf2_hmac("sha256", _to_bytes(seed_phrase), b"fom-autosave-v1", 100000, KEY_LEN)
+        return hashlib.pbkdf2_hmac(b"sha256", _to_bytes(seed_phrase), b"fom-autosave-v1", 100000, KEY_LEN)
 
     def derive_user_id(seed_phrase):
         """Derive the server-side user identifier (SHA-512 hex) from a seed phrase."""

@@ -1,5 +1,4 @@
 default persistent._fom_autosave_config_common = None
-default persistent._fom_autosave_config_github = None
 
 init -1000 python:
     if persistent._fom_autosave_config_common is None:
@@ -7,12 +6,6 @@ init -1000 python:
             "backup_freq": 1,
             "on_exit": False,
             "show_load_warning": True
-        }
-
-    if persistent._fom_autosave_config_github is None:
-        persistent._fom_autosave_config_github = {
-            "repo_name": "",
-            "commit_fmt": "Automatic backup ([reason])"
         }
 
 init -978 python in _fom_autosave_config:
@@ -28,13 +21,12 @@ init -978 python in _fom_autosave_config:
 
 
 screen fom_autosave_settings():
-    $ tooltip_disp = renpy.get_screen("submods", "screens").scope["tooltip"]
-    $ github_api_key = mas_getAPIKey(store._fom_autosave_config.KEY_ID_GITHUB)
-    $ repo_name = persistent._fom_autosave_config_github.get("repo_name", None)
-    $ backup_service = store._fom_autosave_common.SELECTED_BACKUP(reason=_("forced save"))
-
-    $ is_configured = store._fom_autosave_common.SELECTED_BACKUP().is_configured()
-    $ can_save = store._fom_autosave_common.is_safe_to_backup()
+    $ tooltip_disp   = renpy.get_screen("submods", "screens").scope["tooltip"]
+    $ backend        = persistent._fom_autosave_config_common.get("backend", "github")
+    $ backup_class   = store._fom_autosave_common.get_backup_class()
+    $ backup_service = backup_class(reason=_("forced save")) if backup_class else None
+    $ is_configured  = backup_service.is_configured() if backup_service else False
+    $ can_save       = store._fom_autosave_common.is_safe_to_backup()
 
     if persistent._fom_autosave_last_save:
         $ last_backup = persistent._fom_autosave_last_save.strftime("%Y-%m-%d at %H:%M:%S")
@@ -43,46 +35,107 @@ screen fom_autosave_settings():
 
     vbox:
         style_prefix "check"
-        xmaximum 800
+        xmaximum 900
         xfill True
 
         text _("Feeling confused and need help setting up? {b}Click {a=https://github.com/Friends-of-Monika/mas-autosave?tab=readme-ov-file#-configuring}here{/a}.{/b}")
         null height 10
 
-        text _("Github setup checklist:")
-        hbox:
-            if github_api_key:
-                text _("- API token {color=#84cc16}is set{/color}")
-            else:
-                text _("- API token {color=#ef4444}is not set{/color}")
-
-            textbutton _("Open API keys menu"):
-                action Show("mas_apikeys")
-                hovered SetField(tooltip_disp, "value", _("Click to open API keys menu."))
-                unhovered SetField(tooltip_disp, "value", tooltip_disp.default)
-                xoffset -12
-
-        hbox:
-            if repo_name:
-                text _("- Repository {color=#84cc16}is set{/color}{space=10}([repo_name])")
-            else:
-                text _("- Repository {color=#ef4444}is not selected{/color}")
-
-            textbutton _("Select repository"):
-                sensitive bool(github_api_key)
-                action Show("fom_autosave_settings__repo_select")
-                hovered SetField(tooltip_disp, "value", _("Click to select repository to use for backing up."))
-                unhovered SetField(tooltip_disp, "value", tooltip_disp.default)
-                xoffset -12
-
-        if can_save:
-            text _("- There are {color=#84cc16}no issues{/color} blocking backups")
-
-        if store.mas_globals.tt_detected:
-            text _("- {b}{color=#ef4444}Time travel{/color}{/b} is detected in this session.")
+        # Backend picker
+        text _("Storage backend (only one can be used):")
+        hbox spacing 5:
+            textbutton _("Cloud storage"):
+                selected backend == "cloud"
+                action SetDict(persistent._fom_autosave_config_common, "backend", "cloud")
+            textbutton _("Github"):
+                selected backend == "github"
+                action SetDict(persistent._fom_autosave_config_common, "backend", "github")
 
         null height 10
 
+        # GitHub-specific config
+        if backend == "github":
+            $ github_api_key = mas_getAPIKey(store._fom_autosave_config.KEY_ID_GITHUB)
+            $ repo_name      = persistent._fom_autosave_config_github.get("repo_name", None)
+
+            text _("Github setup checklist:")
+            hbox:
+                if github_api_key:
+                    text _("- API token {color=#84cc16}is set{/color}")
+                else:
+                    text _("- API token {color=#ef4444}is not set{/color}")
+
+                textbutton _("Open API keys menu"):
+                    action Show("mas_apikeys")
+                    hovered SetField(tooltip_disp, "value", _("Click to open API keys menu."))
+                    unhovered SetField(tooltip_disp, "value", tooltip_disp.default)
+                    xoffset -12
+
+            hbox:
+                if repo_name:
+                    text _("- Repository {color=#84cc16}is set{/color}{space=10}([repo_name])")
+                else:
+                    text _("- Repository {color=#ef4444}is not selected{/color}")
+
+                textbutton _("Select repository"):
+                    sensitive bool(github_api_key)
+                    action Show("fom_autosave_settings__repo_select")
+                    hovered SetField(tooltip_disp, "value", _("Click to select repository to use for backing up."))
+                    unhovered SetField(tooltip_disp, "value", tooltip_disp.default)
+                    xoffset -12
+
+            if can_save:
+                text _("- There are {color=#84cc16}no issues{/color} blocking backups")
+
+            if store.mas_globals.tt_detected:
+                text _("- {b}{color=#ef4444}Time travel{/color}{/b} is detected in this session.")
+
+        # Cloud storage-specific config
+        elif backend == "cloud":
+            $ cloud_key_set = bool(persistent._fom_autosave_config_cloud.get("user_key", ""))
+
+            text _("Cloud storage setup checklist:")
+            hbox:
+                if cloud_key_set:
+                    text _("- Backup code {color=#84cc16}is set{/color}")
+                else:
+                    text _("- Backup code {color=#ef4444}is not configured{/color}")
+
+                if cloud_key_set:
+                    textbutton _("Show backup code"):
+                        action Show("fom_autosave_settings__cloud_setup", None, False)
+                        hovered SetField(tooltip_disp, "value", _("Click to view your cloud backup code."))
+                        unhovered SetField(tooltip_disp, "value", tooltip_disp.default)
+                        xoffset -12
+
+                    textbutton _("Reset code"):
+                        action Function(store._fom_autosave_cloud.clear_user_key)
+                        hovered SetField(tooltip_disp, "value", _("Click to clear the current backup code."))
+                        unhovered SetField(tooltip_disp, "value", tooltip_disp.default)
+                else:
+                    textbutton _("Generate backup code"):
+                        action [
+                            Function(store._fom_autosave_cloud.generate_user_key),
+                            Show("fom_autosave_settings__cloud_setup", None, True)
+                        ]
+                        hovered SetField(tooltip_disp, "value", _("Click to generate a new cloud backup code."))
+                        unhovered SetField(tooltip_disp, "value", tooltip_disp.default)
+                        xoffset -12
+
+                    textbutton _("Restore backup code"):
+                        action Show("fom_autosave_settings__cloud_restore")
+                        hovered SetField(tooltip_disp, "value", _("Click to restore a backup code from another device."))
+                        unhovered SetField(tooltip_disp, "value", tooltip_disp.default)
+
+            if can_save:
+                text _("- There are {color=#84cc16}no issues{/color} blocking backups")
+
+            if store.mas_globals.tt_detected:
+                text _("- {b}{color=#ef4444}Time travel{/color}{/b} is detected in this session.")
+
+        null height 10
+
+        # Shared: frequency + on-exit (apply to whichever backend is active)
         hbox:
             use fom_autosave_settings__slider(
                 title=_("Backup frequency"),
@@ -101,6 +154,8 @@ screen fom_autosave_settings():
 
         null height 10
 
+        $ load_action = Show("fom_autosave_settings__commit_select") if backend == "github" else Show("fom_autosave_settings__version_select")
+
         hbox:
             textbutton _("Force save"):
                 sensitive is_configured
@@ -109,13 +164,13 @@ screen fom_autosave_settings():
                 else:
                     action Show("fom_autosave_settings__timetravel_error")
 
-                hovered SetField(tooltip_disp, "value", _("Click to force save the persistent to Github."))
+                hovered SetField(tooltip_disp, "value", _("Click to force save the persistent."))
                 unhovered SetField(tooltip_disp, "value", tooltip_disp.default)
                 xoffset -22
 
             textbutton _("Load persistent"):
                 sensitive is_configured
-                action Show("fom_autosave_settings__commit_select")
+                action load_action
                 hovered SetField(tooltip_disp, "value", _("Click to select saved persistent to load."))
                 unhovered SetField(tooltip_disp, "value", tooltip_disp.default)
                 xoffset -32
@@ -255,7 +310,7 @@ screen fom_autosave_settings__slider(title, value, display, tooltip):
 
 screen fom_autosave_settings__commit_select():
     default github_api_key = mas_getAPIKey(store._fom_autosave_config.KEY_ID_GITHUB)
-    default backup_service = store._fom_autosave_common.SELECTED_BACKUP(None)
+    default backup_service = store._fom_autosave_github.GithubBackup(None)
     default promise = store._fom_autosave_task.AsyncTask(store._fom_autosave_github.list_commits,
         repo_owner=persistent._fom_autosave_config_github["repo_owner"],
         repo_name=persistent._fom_autosave_config_github["repo_name"],
