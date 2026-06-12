@@ -1,0 +1,7 @@
+name = "mas-autosave"
+main = "src/index.ts"
+compatibility_date = "2025-06-01"
+
+[[r2_buckets]]
+binding = "SAVES"
+bucket_name = "mas-autosave-saves"
