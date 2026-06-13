@@ -196,3 +196,9 @@ and saving your persistent.
 </details>
 
 You're all set! 🥳
+
+## 🤔 FAQ
+
+**Q:** How do I browse saved persistents? <br>
+**A:** Using Github backend for saving persistents, you can simply navigate to `https://github.com/YOUR_USERNAME/REPO_NAME`,
+where `YOUR_USERNAME` is your Github username, and `REPO_NAME` is the name of the repository you selected in game.

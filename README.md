@@ -1,6 +1,6 @@
 <p align="center">
 	<h1 align="center">☁️ Autosave Submod ☁️</h1>
-	<h3 align="center">Fully automatic persistent backups to Github (so far)</h3>
+	<h3 align="center">Fully automatic persistent backups</h3>
 </p>
 
 <p align="center">
@@ -57,22 +57,21 @@
 3. Drag and drop `Submods` folder from it into your `game` folder.
 4. You're all set!~
 
+## 🤔 FAQ
+
+Looking for a FAQ? We have moved them to their respective guide pages; see the section below.
+
 ## 🔧 Configuring
 
 Autosave submod needs to be configured before it does anything useful, below you
 can find guides to configure various backends.
 
 > [!NOTE]
-> At the moment, only Github backend is supported. In future more options may be available.
+> Please read the guide for your chosen storage.
+> Depending on what you choose, various limitations may apply.
 
+- [Backing up to Cloudflare](guide/CLOUDFLARE.md) 🌥️
 - [Backing up to Github](guide/GITHUB.md) 📦
-
-## 🤔 FAQ
-
-### How do I browse saved persistents?
-
-Using Github backend for saving persistents, you can simply navigate to `https://github.com/YOUR_USERNAME/REPO_NAME`,
-where `YOUR_USERNAME` is your Github username, and `REPO_NAME` is the name of the repository you selected in game.
 
 ## 💬 Join our Discord
 
