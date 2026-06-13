@@ -7,6 +7,10 @@ MAX_VERSIONS = "20"
 MAX_AGE_DAYS = "30"
 MAX_BODY_MB = "2"
 
+[observability.logs]
+enabled = true
+invocation_logs = true
+
 [[r2_buckets]]
 binding = "SAVES"
 bucket_name = "mas-autosave-saves"
