@@ -186,9 +186,15 @@ screen fom_autosave_settings__cloud_setup(first_time):
 
         hbox:
             xalign 0.5
+            spacing 10
+
             textbutton _("Done"):
                 sensitive (persistent._fom_autosave_config_cloud["key_shown"] or not first_time)
                 action ok_action
+
+            if first_time:
+                textbutton _("Back"):
+                    action [Function(store._fom_autosave_cloud.clear_user_key), ok_action]
 
     if persistent._fom_autosave_config_cloud["key_shown"] or not first_time:
         key "K_ESCAPE" action ok_action
