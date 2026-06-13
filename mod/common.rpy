@@ -32,7 +32,13 @@ init 100 python in _fom_autosave_common:
         return None
 
     def is_safe_to_backup():
-        return not store.mas_globals.tt_detected
+        if store.mas_globals.tt_detected:
+            return False
+        if persistent._mas_moni_chksum is not None:
+            return False
+        if persistent._mas_load_in_finalfarewell_mode:
+            return False
+        return True
 
     def backup_persistent(reason="autosave", on_complete=None, on_error=None):
         def local_on_complete():

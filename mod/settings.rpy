@@ -88,7 +88,13 @@ screen fom_autosave_settings():
                 text _("- There are {color=#84cc16}no issues{/color} blocking backups")
 
             if store.mas_globals.tt_detected:
-                text _("- {b}{color=#ef4444}Time travel{/color}{/b} is detected in this session.")
+                text _("- {b}{color=#ef4444}Time travel{/color}{/b} detected")
+
+            if persistent._mas_load_in_finalfarewell_mode:
+                text _("- {b}{color=#ef4444}Monika has left{/color}{/b}")
+
+            if persistent._mas_moni_chksum is not None:
+                text _("- Monika is away")
 
         # Cloud storage-specific config
         elif backend == "cloud":
@@ -132,6 +138,12 @@ screen fom_autosave_settings():
 
             if store.mas_globals.tt_detected:
                 text _("- {b}{color=#ef4444}Time travel{/color}{/b} is detected in this session.")
+
+            if persistent._mas_moni_chksum is not None:
+                text _("- {b}{color=#ef4444}Monika is away{/color}{/b} — backups are disabled while she is out.")
+
+            if persistent._mas_load_in_finalfarewell_mode:
+                text _("- {b}{color=#ef4444}Final farewell{/color}{/b} has occurred — backups are disabled.")
 
         null height 10
 
