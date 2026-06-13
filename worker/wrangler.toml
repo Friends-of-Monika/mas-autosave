@@ -2,6 +2,11 @@ name = "mas-autosave"
 main = "src/index.ts"
 compatibility_date = "2025-06-01"
 
+[vars]
+MAX_VERSIONS = "20"
+MAX_AGE_DAYS = "30"
+MAX_BODY_MB = "2"
+
 [[r2_buckets]]
 binding = "SAVES"
 bucket_name = "mas-autosave-saves"

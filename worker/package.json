@@ -5,13 +5,16 @@
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "hono": "^4.12.25"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20260611.1",
+    "@trivago/prettier-plugin-sort-imports": "^6.0.2",
+    "prettier": "^3.8.4",
     "typescript": "^6.0.3",
     "wrangler": "^4.100.0"
   }
