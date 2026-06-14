@@ -9,7 +9,7 @@
   "tabWidth": 4,
   "trailingComma": "none",
   "useTabs": true,
-  "plugins": ["@trivago/prettier-plugin-sort-imports"],
+  "plugins": ["@trivago/prettier-plugin-sort-imports", "prettier-plugin-svelte"],
   "importOrder": ["^node:", "<THIRD_PARTY_MODULES>", "^\\$", "^\\.\\./", "^\\./"],
   "importOrderParserPlugins": ["typescript", "decorators"],
   "importOrderSeparation": true,
@@ -17,6 +17,10 @@
     {
       "files": ["**/*.{yml,json}", ".prettierrc"],
       "options": { "useTabs": false, "tabWidth": 2 }
+    },
+    {
+      "files": "**/*.svelte",
+      "options": { "parser": "svelte" }
     }
   ]
 }

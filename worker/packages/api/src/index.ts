@@ -1,4 +1,5 @@
 import { Hono } from "hono";
+import { cors } from "hono/cors";
 
 type Bindings = {
 	SAVES: R2Bucket;
@@ -17,6 +18,8 @@ interface VersionEntry {
 const HASH_RE = /^[0-9a-f]+$/;
 
 const app = new Hono<{ Bindings: Bindings }>();
+
+app.use("*", cors({ origin: "*", allowMethods: ["GET", "POST", "OPTIONS"] }));
 
 function indexKey(userHash: string): string {
 	return `user-${userHash}-index`;
