@@ -8,7 +8,8 @@
   "scripts": {
     "dev:api": "yarn workspace @mas-autosave/api dev",
     "dev:frontend": "yarn workspace @mas-autosave/frontend dev",
-    "deploy": "yarn workspace @mas-autosave/api deploy",
+    "build:frontend": "yarn workspace @mas-autosave/frontend run build",
+    "deploy": "yarn build:frontend && yarn workspace @mas-autosave/api deploy",
     "typecheck": "yarn workspaces foreach --all run typecheck",
     "format": "prettier --write ."
   },

@@ -14,3 +14,8 @@ invocation_logs = true
 [[r2_buckets]]
 binding = "SAVES"
 bucket_name = "mas-autosave-saves"
+
+[assets]
+directory = "../frontend/dist"
+not_found_handling = "single-page-application"
+run_worker_first = ["/saves/*"]

@@ -1,4 +1,4 @@
-const ENDPOINT = "https://autosave.workers.mon.icu";
+const ENDPOINT = import.meta.env.VITE_API_ENDPOINT ?? "";
 
 export interface Version {
 	sha256: string;
