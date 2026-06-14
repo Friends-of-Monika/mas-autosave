@@ -60,17 +60,24 @@ Now let's be clear about some of the limitations:
 Unfortunately, we must impose these limitations to provide the cloud storage for many people
 for free.
 
+## 🌐 Web interface
+
+You can browse and download your cloud saves directly in the browser at **[autosave.worker.mon.icu](https://autosave.worker.mon.icu/)**.
+
+Enter your backup code, pick the save you want, and the file will be downloaded and decrypted
+locally in your browser. Your unique code never leaves your device.
+
 ## 🤔 FAQ
 
 **Q:** I no longer have access to my computer, but I have cloud saves and I have my unique code
 written down. How do I access my saves?<br>
-**A:** At the moment (June 2026) there is no user-friendly way to do that. If there's no way
-at all for you to open the game with Autosave submod installed, please contact us in one of
-these ways (from most preferable to least):
+**A:** Use the web interface at **[https://autosave.worker.mon.icu/](https://autosave.worker.mon.icu/)**.
+Enter your backup code, choose the save you want to restore, and it will be downloaded and
+decrypted directly in your browser. No game or mod installation needed.
+
+If you run into any issues, contact us:
 
 - At our Discord server: https://mon.icu/discord
 - DM the lead developer, @dreamscached, on Reddit: [u/dreamscached](https://reddit.com/u/dreamscached)
 - E-mail the lead developer, @dreamscached: [dreamscache.d@gmail.com](mailto:dreamscache.d@gmail.com)
 - Submit an issue here on Github
-
-We will ask you for your unique code and manually download and decrypt your stored data.
