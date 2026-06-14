@@ -18,8 +18,8 @@ Click on plus button at the top, and click on 'New repository'
 <summary><b>🖼️ Click here to see screenshots</b></summary>
 <table><tr><td>
 
-![Screenshot 1](../doc/ghsetup_repo_1.png)
-![Screenshot 2](../doc/ghsetup_repo_2.png)
+![Screenshot 1](../doc/setup/github/ghsetup_repo_1.png)
+![Screenshot 2](../doc/setup/github/ghsetup_repo_2.png)
 
 </td></tr></table>
 </details>
@@ -34,7 +34,7 @@ Here, enter any desired name (`monika-autosaves` is a good example), and set it 
 <summary><b>🖼️ Click here to see screenshots</b></summary>
 <table><tr><td>
 
-![Screenshot 1](../doc/ghsetup_repo_3.png)
+![Screenshot 1](../doc/setup/github/ghsetup_repo_3.png)
 
 </td></tr></table>
 </details>
@@ -49,8 +49,8 @@ Go to your settings &mdash; click on your avatar in the top corner, then on 'Set
 <summary><b>🖼️ Click here to see screenshots</b></summary>
 <table><tr><td>
 
-![Screenshot 1](../doc/ghsetup_token_1.png)
-![Screenshot 2](../doc/ghsetup_token_2.png)
+![Screenshot 1](../doc/setup/github/ghsetup_token_1.png)
+![Screenshot 2](../doc/setup/github/ghsetup_token_2.png)
 
 </td></tr></table>
 </details>
@@ -62,7 +62,7 @@ the section labelled 'Developer settings'
 <summary><b>🖼️ Click here to see screenshots</b></summary>
 <table><tr><td>
 
-![Screenshot 1](../doc/ghsetup_token_3.png)
+![Screenshot 1](../doc/setup/github/ghsetup_token_3.png)
 
 </td></tr></table>
 </details>
@@ -73,8 +73,8 @@ Now, click on 'Personal access tokens' section to unfold it, then on 'Fine-grain
 <summary><b>🖼️ Click here to see screenshots</b></summary>
 <table><tr><td>
 
-![Screenshot 1](../doc/ghsetup_token_4.png)
-![Screenshot 2](../doc/ghsetup_token_5.png)
+![Screenshot 1](../doc/setup/github/ghsetup_token_4.png)
+![Screenshot 2](../doc/setup/github/ghsetup_token_5.png)
 
 </td></tr></table>
 </details>
@@ -88,7 +88,7 @@ Click on 'Generate new token' button
 <summary><b>🖼️ Click here to see screenshots</b></summary>
 <table><tr><td>
 
-![Screenshot 1](../doc/ghsetup_token_6.png)
+![Screenshot 1](../doc/setup/github/ghsetup_token_6.png)
 
 </td></tr></table>
 </details>
@@ -101,7 +101,7 @@ renew this API token again in future
 <summary><b>🖼️ Click here to see screenshots</b></summary>
 <table><tr><td>
 
-![Screenshot 1](../doc/ghsetup_token_7.png)
+![Screenshot 1](../doc/setup/github/ghsetup_token_7.png)
 
 </td></tr></table>
 </details>
@@ -112,8 +112,8 @@ Further on, scroll down to 'Repository access' section; here, click on 'Only sel
 <summary><b>🖼️ Click here to see screenshots</b></summary>
 <table><tr><td>
 
-![Screenshot 1](../doc/ghsetup_token_8.png)
-![Screenshot 2](../doc/ghsetup_token_9.png)
+![Screenshot 1](../doc/setup/github/ghsetup_token_8.png)
+![Screenshot 2](../doc/setup/github/ghsetup_token_9.png)
 
 </td></tr></table>
 </details>
@@ -125,9 +125,9 @@ Then scroll down to 'Permissions' section; click on it to unfold, find
 <summary><b>🖼️ Click here to see screenshots</b></summary>
 <table><tr><td>
 
-![Screenshot 1](../doc/ghsetup_token_10.png)
-![Screenshot 2](../doc/ghsetup_token_11.png)
-![Screenshot 3](../doc/ghsetup_token_12.png)
+![Screenshot 1](../doc/setup/github/ghsetup_token_10.png)
+![Screenshot 2](../doc/setup/github/ghsetup_token_11.png)
+![Screenshot 3](../doc/setup/github/ghsetup_token_12.png)
 
 </td></tr></table>
 </details>
@@ -138,8 +138,8 @@ Almost there &mdash; scroll until you see 'Generate token' button and press it, 
 <summary><b>🖼️ Click here to see screenshots</b></summary>
 <table><tr><td>
 
-![Screenshot 1](../doc/ghsetup_token_13.png)
-![Screenshot 2](../doc/ghsetup_token_14.png)
+![Screenshot 1](../doc/setup/github/ghsetup_token_13.png)
+![Screenshot 2](../doc/setup/github/ghsetup_token_14.png)
 
 </td></tr></table>
 </details>
@@ -154,7 +154,7 @@ Open Submods menu in settings, and click on 'API Keys' section on the left
 <summary><b>🖼️ Click here to see screenshots</b></summary>
 <table><tr><td>
 
-![Screenshot 1](../doc/ghsetup_mas_1.png)
+![Screenshot 1](../doc/setup/github/ghsetup_mas_1.png)
 
 </td></tr></table>
 </details>
@@ -165,8 +165,8 @@ Find '\[Autosave\] Github API token' field, and click 'Paste'
 <summary><b>🖼️ Click here to see screenshots</b></summary>
 <table><tr><td>
 
-![Screenshot 1](../doc/ghsetup_mas_2.png)
-![Screenshot 1](../doc/ghsetup_mas_3.png)
+![Screenshot 1](../doc/setup/github/ghsetup_mas_2.png)
+![Screenshot 1](../doc/setup/github/ghsetup_mas_3.png)
 
 </td></tr></table>
 </details>
@@ -176,8 +176,8 @@ Open 'Submods' section on the left, and find 'Autosave' submod in the list &mdas
 <summary><b>🖼️ Click here to see screenshots</b></summary>
 <table><tr><td>
 
-![Screenshot 1](../doc/ghsetup_mas_4.png)
-![Screenshot 2](../doc/ghsetup_mas_5.png)
+![Screenshot 1](../doc/setup/github/ghsetup_mas_4.png)
+![Screenshot 2](../doc/setup/github/ghsetup_mas_5.png)
 
 </td></tr></table>
 </details>
@@ -189,10 +189,16 @@ and saving your persistent.
 <summary><b>🖼️ Click here to see screenshots</b></summary>
 <table><tr><td>
 
-![Screenshot 1](../doc/ghsetup_mas_6.png)
-![Screenshot 2](../doc/ghsetup_mas_7.png)
+![Screenshot 1](../doc/setup/github/ghsetup_mas_6.png)
+![Screenshot 2](../doc/setup/github/ghsetup_mas_7.png)
 
 </td></tr></table>
 </details>
 
 You're all set! 🥳
+
+## 🤔 FAQ
+
+**Q:** How do I browse saved persistents? <br>
+**A:** Using Github backend for saving persistents, you can simply navigate to `https://github.com/YOUR_USERNAME/REPO_NAME`,
+where `YOUR_USERNAME` is your Github username, and `REPO_NAME` is the name of the repository you selected in game.

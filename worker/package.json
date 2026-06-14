@@ -1,0 +1,22 @@
+{
+  "packageManager": "yarn@4.16.0",
+  "name": "mas-autosave-worker",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:api": "yarn workspace @mas-autosave/api dev",
+    "dev:frontend": "yarn workspace @mas-autosave/frontend dev",
+    "build:frontend": "yarn workspace @mas-autosave/frontend run build",
+    "deploy": "yarn build:frontend && yarn workspace @mas-autosave/api deploy",
+    "typecheck": "yarn workspaces foreach --all run typecheck",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^6.0.2",
+    "prettier": "^3.8.4",
+    "prettier-plugin-svelte": "^4.1.0",
+    "typescript": "^6.0.3"
+  }
+}

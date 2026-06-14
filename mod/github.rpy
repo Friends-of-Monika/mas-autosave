@@ -1,3 +1,12 @@
+default persistent._fom_autosave_config_github = None
+
+init -1000 python:
+    if persistent._fom_autosave_config_github is None:
+        persistent._fom_autosave_config_github = {
+            "repo_name": "",
+            "commit_fmt": "Automatic backup ([reason])"
+        }
+
 init -897 python in _fom_autosave_github:
     from store._fom_autosave_http import request, urlencode
     from store._fom_autosave_common import PersistentBackup

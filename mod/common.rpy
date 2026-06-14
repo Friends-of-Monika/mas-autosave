@@ -18,11 +18,27 @@ init 100 python in _fom_autosave_common:
 
     from datetime import datetime
 
-    SELECTED_BACKUP = GithubBackup # only Github for now
+    BACKEND_GITHUB = "github"
+    BACKEND_CLOUD  = "cloud"
+
     is_any_pending = False
 
+    def get_backup_class():
+        backend = persistent._fom_autosave_config_common.get("backend", BACKEND_GITHUB)
+        if backend == BACKEND_GITHUB:
+            return store._fom_autosave_github.GithubBackup
+        if backend == BACKEND_CLOUD:
+            return store._fom_autosave_cloud.CloudBackup
+        return None
+
     def is_safe_to_backup():
-        return not store.mas_globals.tt_detected
+        if store.mas_globals.tt_detected:
+            return False
+        if persistent._mas_moni_chksum is not None:
+            return False
+        if persistent._mas_load_in_finalfarewell_mode:
+            return False
+        return True
 
     def backup_persistent(reason="autosave", on_complete=None, on_error=None):
         def local_on_complete():
@@ -39,7 +55,11 @@ init 100 python in _fom_autosave_common:
             if on_error is not None:
                 on_error()
 
-        backup_service = SELECTED_BACKUP(reason)
+        backup_class = get_backup_class()
+        if backup_class is None:
+            return
+
+        backup_service = backup_class(reason)
         if backup_service.is_configured() and is_safe_to_backup():
             global is_any_pending
             is_any_pending = True

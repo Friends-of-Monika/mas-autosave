@@ -1,0 +1,21 @@
+name = "mas-autosave"
+main = "src/index.ts"
+compatibility_date = "2025-06-01"
+
+[vars]
+MAX_VERSIONS = "20"
+MAX_AGE_DAYS = "30"
+MAX_BODY_MB = "2"
+
+[observability.logs]
+enabled = true
+invocation_logs = true
+
+[[r2_buckets]]
+binding = "SAVES"
+bucket_name = "mas-autosave-saves"
+
+[assets]
+directory = "../frontend/dist"
+not_found_handling = "single-page-application"
+run_worker_first = ["/saves/*"]
