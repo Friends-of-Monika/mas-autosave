@@ -67,22 +67,37 @@ the section labelled 'Developer settings'
 </td></tr></table>
 </details>
 
-Now, click on 'Personal access tokens' section to unfold it, then on 'Fine-grained tokens'
+Now, click on 'Personal access tokens' section to unfold it, then on 'Tokens (classic)'
 
 <details>
 <summary><b>🖼️ Click here to see screenshots</b></summary>
 <table><tr><td>
 
-![Screenshot 1](../doc/setup/github/ghsetup_token_4.png)
-![Screenshot 2](../doc/setup/github/ghsetup_token_5.png)
+![Screenshot 2](../doc/setup/github/ghsetup_token_4.png)
 
 </td></tr></table>
 </details>
 
-Click on 'Generate new token' button
+Click on 'Generate new token' button, and select 'Generate new token (classic)'
 
 > [!NOTE]
 > You may be asked to enter your password or authorize with 2FA here &mdash; do so if asked
+
+<details>
+<summary><b>🖼️ Click here to see screenshots</b></summary>
+<table><tr><td>
+
+![Screenshot 1](../doc/setup/github/ghsetup_token_5.png)
+
+</td></tr></table>
+</details>
+
+Type anything you like in the 'Token name' field &mdash; it only serves as a label for you;
+next up, select 'No expiration' under 'Expiration' field &mdash; so that you won't have to
+renew this API token again in future
+
+Don't check any permission checkboxes, default token access already permits repository
+write access
 
 <details>
 <summary><b>🖼️ Click here to see screenshots</b></summary>
@@ -93,9 +108,7 @@ Click on 'Generate new token' button
 </td></tr></table>
 </details>
 
-Type anything you like in the 'Token name' field &mdash; it only serves as a label for you;
-next up, select 'No expiration' under 'Expiration' field &mdash; so that you won't have to
-renew this API token again in future
+Scroll further down, and click on 'Generate token' button
 
 <details>
 <summary><b>🖼️ Click here to see screenshots</b></summary>
@@ -106,43 +119,7 @@ renew this API token again in future
 </td></tr></table>
 </details>
 
-Further on, scroll down to 'Repository access' section; here, click on 'Only select repositories', and select your previously created repository from the list
-
-<details>
-<summary><b>🖼️ Click here to see screenshots</b></summary>
-<table><tr><td>
-
-![Screenshot 1](../doc/setup/github/ghsetup_token_8.png)
-![Screenshot 2](../doc/setup/github/ghsetup_token_9.png)
-
-</td></tr></table>
-</details>
-
-Then scroll down to 'Permissions' section; click on it to unfold, find
-'Contents' section and set it to 'Read and write'
-
-<details>
-<summary><b>🖼️ Click here to see screenshots</b></summary>
-<table><tr><td>
-
-![Screenshot 1](../doc/setup/github/ghsetup_token_10.png)
-![Screenshot 2](../doc/setup/github/ghsetup_token_11.png)
-![Screenshot 3](../doc/setup/github/ghsetup_token_12.png)
-
-</td></tr></table>
-</details>
-
-Almost there &mdash; scroll until you see 'Generate token' button and press it, then copy the token using 'copy' button
-
-<details>
-<summary><b>🖼️ Click here to see screenshots</b></summary>
-<table><tr><td>
-
-![Screenshot 1](../doc/setup/github/ghsetup_token_13.png)
-![Screenshot 2](../doc/setup/github/ghsetup_token_14.png)
-
-</td></tr></table>
-</details>
+Now copy this token by clicking on the button with 'copy' icon;
 
 Github stuff is behind us now &mdash; let's set up Autosave submod in game 🎉
 
