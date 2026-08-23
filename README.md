@@ -70,7 +70,7 @@ can find guides to configure various backends.
 > Please read the guide for your chosen storage.
 > Depending on what you choose, various limitations may apply.
 
-- [Backing up to Cloudflare](guide/CLOUDFLARE.md) 🌥️
+<!-- - [Backing up to Cloudflare](guide/CLOUDFLARE.md) 🌥️ --->
 - [Backing up to Github](guide/GITHUB.md) 📦
 
 ## 💬 Join our Discord
