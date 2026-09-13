@@ -96,8 +96,7 @@ Type anything you like in the 'Token name' field &mdash; it only serves as a lab
 next up, select 'No expiration' under 'Expiration' field &mdash; so that you won't have to
 renew this API token again in future
 
-Don't check any permission checkboxes, default token access already permits repository
-write access
+**Make sure** to check `repo` scope! Otherwise you will not be able to see your repository.
 
 <details>
 <summary><b>🖼️ Click here to see screenshots</b></summary>
