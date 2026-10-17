@@ -153,6 +153,39 @@ screen fom_autosave_settings__cloud_restore():
     key "K_ESCAPE" action back_action
 
 
+screen fom_autosave_settings__cloud_reset():
+    modal True
+    zorder 200
+
+    default back_action = Hide("fom_autosave_settings__cloud_reset")
+
+    use fom_autosave_screens__confirm(xmaximum=540, ymaximum=240, spacing=20):
+        style_prefix "confirm"
+
+        text _("Reset backup code"):
+            style "confirm_prompt"
+            xalign 0.5
+
+        text _("Are you sure? Without this code you will not be able to restore your existing cloud backups. Make sure you have it written down."):
+            xalign 0.5
+            text_align 0.5
+
+        hbox:
+            xalign 0.5
+            spacing 10
+
+            textbutton _("Reset"):
+                action [
+                    Function(store._fom_autosave_cloud.clear_user_key),
+                    back_action
+                ]
+
+            textbutton _("Back"):
+                action back_action
+
+    key "K_ESCAPE" action back_action
+
+
 screen fom_autosave_settings__cloud_setup(first_time):
     modal True
     zorder 200

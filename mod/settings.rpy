@@ -115,7 +115,7 @@ screen fom_autosave_settings():
                         xoffset -12
 
                     textbutton _("Reset code"):
-                        action Function(store._fom_autosave_cloud.clear_user_key)
+                        action Show("fom_autosave_settings__cloud_reset")
                         hovered SetField(tooltip_disp, "value", _("Click to clear the current backup code."))
                         unhovered SetField(tooltip_disp, "value", tooltip_disp.default)
                 else:
