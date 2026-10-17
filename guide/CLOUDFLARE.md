@@ -71,7 +71,7 @@ locally in your browser. Your unique code never leaves your device.
 
 **Q:** I no longer have access to my computer, but I have cloud saves and I have my unique code
 written down. How do I access my saves?<br>
-**A:** Use the web interface at **[https://autosave.worker.mon.icu/](https://autosave.worker.mon.icu/)**.
+**A:** Use the web interface at **[https://saves.mon.icu/](https://saves.mon.icu/)**.
 Enter your backup code, choose the save you want to restore, and it will be downloaded and
 decrypted directly in your browser. No game or mod installation needed.
 
