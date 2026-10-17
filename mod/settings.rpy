@@ -44,7 +44,7 @@ screen fom_autosave_settings():
         # Backend picker
         text _("Storage backend (only one can be used):")
         hbox spacing 5:
-            textbutton _("Cloud storage"):
+            textbutton _("Cloudflare"):
                 selected backend == "cloud"
                 action SetDict(persistent._fom_autosave_config_common, "backend", "cloud")
             textbutton _("Github"):
