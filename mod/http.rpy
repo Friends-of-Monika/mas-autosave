@@ -27,7 +27,7 @@ init -898 python in _fom_autosave_http:
     from store._fom_autosave_logging import logger
     import sys
 
-    if sys.version_info.major == 2: # Python v2 only
+    if sys.version_info.major == 2: # Python v2
         from urllib2 import HTTPError
         import urllib2
         import urllib
@@ -66,3 +66,37 @@ init -898 python in _fom_autosave_http:
 
         def urlencode(s):
             return urllib.urlencode(s)
+
+    else: # Python v3
+        from urllib.error import HTTPError
+        import urllib.parse
+        import urllib.request
+        import ssl
+
+        def request(method, url, headers=None, body=None, timeout=10):
+            if isinstance(body, str):
+                body = body.encode("utf-8")
+            req = urllib.request.Request(url, data=body, method=method)
+
+            if headers is None:
+                headers = {}
+            for k, v in headers.items():
+                req.add_header(k, v)
+
+            logger.debug("[http] {method} {url}".format(method=method, url=url))
+            context = ssl.create_default_context(cafile=SSL_CERT_FILE)
+            opener = urllib.request.build_opener(urllib.request.HTTPSHandler(context=context))
+
+            try:
+                res = opener.open(req, timeout=timeout)
+                status = res.getcode()
+                res_body = res.read()
+            except HTTPError as e:
+                logger.debug("[http] {0} {1} - {2} | {3}", method, url, e.code, repr(e.read()[:500]))
+                raise e
+
+            logger.debug("[http] {0} {1} - {2}", method, url, status)
+            return status, res_body
+
+        def urlencode(s):
+            return urllib.parse.urlencode(s)
