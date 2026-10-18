@@ -1,3 +1,6 @@
+# This file is part of Autosave Submod (see link below):
+# https://github.com/friends-of-monika/mas-autosave
+
 init -990 python:
     store.mas_submod_utils.Submod(
         author="Friends of Monika",
