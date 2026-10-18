@@ -1,3 +1,6 @@
+# This file is part of Autosave Submod (see link below):
+# https://github.com/friends-of-monika/mas-autosave
+
 default persistent._fom_autosave_last_save = None
 
 init -1000 python in _fom_autosave_timer:
