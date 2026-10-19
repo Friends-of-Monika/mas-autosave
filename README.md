@@ -70,8 +70,12 @@ can find guides to configure various backends.
 > Please read the guide for your chosen storage.
 > Depending on what you choose, various limitations may apply.
 
-<!-- - [Backing up to Cloudflare](guide/CLOUDFLARE.md) 🌥️ --->
-- [Backing up to Github](guide/GITHUB.md) 📦
+> [!WARNING]
+> Backing up to GitHub is no longer recommended, but we'll leave
+> it in the submod until next major release.
+
+- [Backing up to Cloudflare](guide/CLOUDFLARE.md) 🌥️
+- ~~[Backing up to Github](guide/GITHUB.md) 📦~~
 
 ## 💬 Join our Discord
 
