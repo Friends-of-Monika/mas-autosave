@@ -36,6 +36,10 @@ async function sha256hex(data: ArrayBuffer): Promise<string> {
 		.join("");
 }
 
+function maxAgeMs(env: Bindings): number {
+	return parseInt(env.MAX_AGE_DAYS ?? "30") * 24 * 60 * 60 * 1000;
+}
+
 async function readIndex(bucket: R2Bucket, userHash: string): Promise<VersionEntry[]> {
 	const obj = await bucket.get(indexKey(userHash));
 	if (!obj) return [];
@@ -59,7 +63,6 @@ app.post("/saves/:hash/upload", async (c) => {
 	}
 
 	const maxVersions = parseInt(c.env.MAX_VERSIONS ?? "20");
-	const maxAgeMs = parseInt(c.env.MAX_AGE_DAYS ?? "30") * 24 * 60 * 60 * 1000;
 	const maxBodyBytes = parseInt(c.env.MAX_BODY_MB ?? "2") * 1024 * 1024;
 
 	const reason = c.req.query("reason") ?? "autosave";
@@ -80,7 +83,7 @@ app.post("/saves/:hash/upload", async (c) => {
 
 	const now = new Date().toISOString();
 	let index = await readIndex(c.env.SAVES, userHash);
-	const cutoff = Date.now() - maxAgeMs;
+	const cutoff = Date.now() - maxAgeMs(c.env);
 
 	// Prune expired entries and delete their objects
 	const expired = index.filter((e) => new Date(e.timestamp).getTime() < cutoff);
@@ -106,8 +109,10 @@ app.get("/saves/:hash/versions", async (c) => {
 		return c.json({ error: "invalid hash" }, 400);
 	}
 
+	// Expired entries are only pruned on upload, so hide them here
+	const cutoff = Date.now() - maxAgeMs(c.env);
 	const index = await readIndex(c.env.SAVES, userHash);
-	return c.json(index);
+	return c.json(index.filter((e) => new Date(e.timestamp).getTime() >= cutoff));
 });
 
 app.get("/saves/:hash/:uploadHash", async (c) => {
@@ -118,7 +123,7 @@ app.get("/saves/:hash/:uploadHash", async (c) => {
 	}
 
 	const obj = await c.env.SAVES.get(persistentKey(userHash, uploadHash));
-	if (!obj) {
+	if (!obj || obj.uploaded.getTime() < Date.now() - maxAgeMs(c.env)) {
 		return c.json({ error: "not found" }, 404);
 	}
 
