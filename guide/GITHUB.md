@@ -4,7 +4,7 @@
 > GitHub as a backup storage is being deprecated in favor of [Cloudflare](CLOUDFLARE.md)
 > due to potential data loss risk if GitHub one day decides automated backups are a violation
 > of their ToS. We've seen only one such case so far, but we want to be cautious.
-> Future (starting with v0.6) versions of the submod will no longer allow backing up
+> Future (starting with v0.1) versions of the submod will no longer allow backing up
 > to GitHub.
 
 > [!NOTE]
