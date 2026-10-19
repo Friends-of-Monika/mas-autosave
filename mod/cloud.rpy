@@ -115,21 +115,24 @@ init -896 python in _fom_autosave_cloud:
                 f.write(plaintext)
 
 
-screen fom_autosave_settings__cloud_restore():
+screen fom_autosave_settings__cloud_set():
     modal True
     zorder 200
 
     default entered = ""
-    default back_action = Hide("fom_autosave_settings__cloud_restore")
+    default back_action = Hide("fom_autosave_settings__cloud_set")
 
-    use fom_autosave_screens__confirm(xmaximum=540, ymaximum=240, spacing=20):
+    $ is_empty = not entered.strip()
+    $ is_valid = store._fom_autosave_cloud.is_valid_uuid(entered)
+
+    use fom_autosave_screens__confirm(xmaximum=540, ymaximum=280, spacing=20):
         style_prefix "confirm"
 
-        text _("Restore backup code"):
+        text _("Set or generate secret code"):
             style "confirm_prompt"
             xalign 0.5
 
-        text _("Enter the backup code from your other device:"):
+        text _("Enter the secret code from your other device, or leave empty to generate a new one:"):
             xalign 0.5
             text_align 0.5
 
@@ -139,16 +142,29 @@ screen fom_autosave_settings__cloud_restore():
             pixel_width 460
             xalign 0.5
 
+        if not is_empty and not is_valid:
+            text _("{color=#ef4444}This is not a valid secret code.{/color}"):
+                xalign 0.5
+                text_align 0.5
+
         hbox:
             xalign 0.5
             spacing 10
 
-            textbutton _("Confirm"):
-                sensitive store._fom_autosave_cloud.is_valid_uuid(entered)
-                action [
-                    Function(store._fom_autosave_cloud.restore_user_key, entered),
-                    back_action
-                ]
+            if is_empty:
+                textbutton _("Generate"):
+                    action [
+                        Function(store._fom_autosave_cloud.generate_user_key),
+                        back_action,
+                        Show("fom_autosave_settings__cloud_setup", None, True)
+                    ]
+            else:
+                textbutton _("Confirm"):
+                    sensitive is_valid
+                    action [
+                        Function(store._fom_autosave_cloud.restore_user_key, entered),
+                        back_action
+                    ]
 
             textbutton _("Back"):
                 action back_action

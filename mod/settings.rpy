@@ -121,20 +121,13 @@ screen fom_autosave_settings():
                         action Show("fom_autosave_settings__cloud_reset")
                         hovered SetField(tooltip_disp, "value", _("Click to clear the current backup code."))
                         unhovered SetField(tooltip_disp, "value", tooltip_disp.default)
+                        xoffset -24
                 else:
-                    textbutton _("Generate backup code"):
-                        action [
-                            Function(store._fom_autosave_cloud.generate_user_key),
-                            Show("fom_autosave_settings__cloud_setup", None, True)
-                        ]
-                        hovered SetField(tooltip_disp, "value", _("Click to generate a new cloud backup code."))
+                    textbutton _("Set or generate secret code"):
+                        action Show("fom_autosave_settings__cloud_set")
+                        hovered SetField(tooltip_disp, "value", _("Click to enter a secret code from another device, or generate a new one."))
                         unhovered SetField(tooltip_disp, "value", tooltip_disp.default)
                         xoffset -12
-
-                    textbutton _("Restore backup code"):
-                        action Show("fom_autosave_settings__cloud_restore")
-                        hovered SetField(tooltip_disp, "value", _("Click to restore a backup code from another device."))
-                        unhovered SetField(tooltip_disp, "value", tooltip_disp.default)
 
             if can_save:
                 text _("- There are {color=#84cc16}no issues{/color} blocking backups")
