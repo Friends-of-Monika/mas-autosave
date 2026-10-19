@@ -62,7 +62,7 @@ for free.
 
 ## 🌐 Web interface
 
-You can browse and download your cloud saves directly in the browser at **[autosave.worker.mon.icu](https://autosave.worker.mon.icu/)**.
+You can browse and download your cloud saves directly in the browser at **[saves.mon.icu](https://saves.mon.icu/)**.
 
 Enter your backup code, pick the save you want, and the file will be downloaded and decrypted
 locally in your browser. Your unique code never leaves your device.
