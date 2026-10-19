@@ -1,3 +1,6 @@
+# This file is part of Autosave Submod (see link below):
+# https://github.com/friends-of-monika/mas-autosave
+
 init -899 python in _fom_autosave_logging:
     from store.mas_submod_utils import submod_log
     import traceback

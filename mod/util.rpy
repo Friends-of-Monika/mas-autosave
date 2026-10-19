@@ -1,3 +1,6 @@
+# This file is part of Autosave Submod (see link below):
+# https://github.com/friends-of-monika/mas-autosave
+
 init -999 python in _fom_autosave_lib:
     from store import fom_getScriptDir
     import sys

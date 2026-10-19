@@ -1,3 +1,6 @@
+# This file is part of Autosave Submod (see link below):
+# https://github.com/friends-of-monika/mas-autosave
+
 screen fom_autosave_screens__confirm(**properties):
     style_prefix "confirm"
     add mas_getTimeFile("gui/overlay/confirm.png")

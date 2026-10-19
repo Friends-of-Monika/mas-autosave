@@ -1,3 +1,6 @@
+# This file is part of Autosave Submod (see link below):
+# https://github.com/friends-of-monika/mas-autosave
+
 init -1000 python in _fom_autosave_task:
     from store.mas_threading import MASAsyncWrapper
 

@@ -1,3 +1,6 @@
+# This file is part of Autosave Submod (see link below):
+# https://github.com/friends-of-monika/mas-autosave
+
 default persistent._fom_autosave_config_common = None
 
 init -1000 python:
@@ -44,7 +47,7 @@ screen fom_autosave_settings():
         # Backend picker
         text _("Storage backend (only one can be used):")
         hbox spacing 5:
-            textbutton _("Cloud storage"):
+            textbutton _("Cloudflare"):
                 selected backend == "cloud"
                 action SetDict(persistent._fom_autosave_config_common, "backend", "cloud")
             textbutton _("Github"):
@@ -115,23 +118,16 @@ screen fom_autosave_settings():
                         xoffset -12
 
                     textbutton _("Reset code"):
-                        action Function(store._fom_autosave_cloud.clear_user_key)
+                        action Show("fom_autosave_settings__cloud_reset")
                         hovered SetField(tooltip_disp, "value", _("Click to clear the current backup code."))
                         unhovered SetField(tooltip_disp, "value", tooltip_disp.default)
+                        xoffset -24
                 else:
-                    textbutton _("Generate backup code"):
-                        action [
-                            Function(store._fom_autosave_cloud.generate_user_key),
-                            Show("fom_autosave_settings__cloud_setup", None, True)
-                        ]
-                        hovered SetField(tooltip_disp, "value", _("Click to generate a new cloud backup code."))
+                    textbutton _("Set or generate secret code"):
+                        action Show("fom_autosave_settings__cloud_set")
+                        hovered SetField(tooltip_disp, "value", _("Click to enter a secret code from another device, or generate a new one."))
                         unhovered SetField(tooltip_disp, "value", tooltip_disp.default)
                         xoffset -12
-
-                    textbutton _("Restore backup code"):
-                        action Show("fom_autosave_settings__cloud_restore")
-                        hovered SetField(tooltip_disp, "value", _("Click to restore a backup code from another device."))
-                        unhovered SetField(tooltip_disp, "value", tooltip_disp.default)
 
             if can_save:
                 text _("- There are {color=#84cc16}no issues{/color} blocking backups")

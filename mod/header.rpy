@@ -1,8 +1,11 @@
+# This file is part of Autosave Submod (see link below):
+# https://github.com/friends-of-monika/mas-autosave
+
 init -990 python:
     store.mas_submod_utils.Submod(
         author="Friends of Monika",
         name="Autosave",
-        description=_("Automatic backing up to Github {b}{color=#ef4444}[[BETA]{/color}{/b}"),
+        description=_("Automatic backing up to Github and Cloudflare {b}{color=#ef4444}[[BETA]{/color}{/b}"),
         version="0.1.0",
         settings_pane="fom_autosave_settings"
     )
