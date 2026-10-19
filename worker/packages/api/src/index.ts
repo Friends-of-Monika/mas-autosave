@@ -6,6 +6,7 @@ type Bindings = {
 	MAX_VERSIONS?: string;
 	MAX_AGE_DAYS?: string;
 	MAX_BODY_MB?: string;
+	MAX_UPLOADS_PER_HOUR?: string;
 };
 
 interface VersionEntry {
@@ -61,6 +62,20 @@ app.post("/saves/:hash/upload", async (c) => {
 	const maxVersions = parseInt(c.env.MAX_VERSIONS ?? "20");
 	const maxAgeMs = parseInt(c.env.MAX_AGE_DAYS ?? "30") * 24 * 60 * 60 * 1000;
 	const maxBodyBytes = parseInt(c.env.MAX_BODY_MB ?? "2") * 1024 * 1024;
+	const maxUploadsPerHour = parseInt(c.env.MAX_UPLOADS_PER_HOUR ?? "3");
+
+	let index = await readIndex(c.env.SAVES, userHash);
+
+	// Rate limit: count uploads within the last hour
+	const hourMs = 60 * 60 * 1000;
+	const recent = index
+		.map((e) => new Date(e.timestamp).getTime())
+		.filter((t) => Date.now() - t < hourMs);
+	if (recent.length >= maxUploadsPerHour) {
+		const retryAfter = Math.ceil((Math.min(...recent) + hourMs - Date.now()) / 1000);
+		c.header("Retry-After", String(retryAfter));
+		return c.json({ error: "too many uploads" }, 429);
+	}
 
 	const reason = c.req.query("reason") ?? "autosave";
 
@@ -79,7 +94,6 @@ app.post("/saves/:hash/upload", async (c) => {
 	});
 
 	const now = new Date().toISOString();
-	let index = await readIndex(c.env.SAVES, userHash);
 	const cutoff = Date.now() - maxAgeMs;
 
 	// Prune expired entries and delete their objects

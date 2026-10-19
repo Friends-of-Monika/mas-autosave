@@ -6,6 +6,7 @@ compatibility_date = "2025-06-01"
 MAX_VERSIONS = "20"
 MAX_AGE_DAYS = "30"
 MAX_BODY_MB = "2"
+MAX_UPLOADS_PER_HOUR = "3"
 
 [observability.logs]
 enabled = true
