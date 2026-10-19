@@ -1,8 +1,5 @@
 # 🌥️ Configuring Cloudflare backend
 
-> [!NOTE]
-> Every step has screenshots to help you, click on the spoiler to reveal them!
-
 Cloudflare is the easiest (though has its tradeoffs &mdash; please read important info up ahead)
 way to store automated backups in Friends of Monika provided online storage. All it takes is
 for you to write down a unique key the submod will generate for you and keep it somewhere safe
