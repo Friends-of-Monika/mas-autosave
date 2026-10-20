@@ -18,3 +18,8 @@ export async function downloadVersion(userId: string, sha256: string): Promise<A
 	if (!res.ok) throw new Error(`Server returned ${res.status}`);
 	return res.arrayBuffer();
 }
+
+export async function deleteAllData(userId: string): Promise<void> {
+	const res = await fetch(`${ENDPOINT}/saves/${userId}`, { method: "DELETE" });
+	if (!res.ok) throw new Error(`Server returned ${res.status}`);
+}
