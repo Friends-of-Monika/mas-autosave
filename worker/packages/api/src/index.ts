@@ -19,7 +19,7 @@ const HASH_RE = /^[0-9a-f]+$/;
 
 const app = new Hono<{ Bindings: Bindings }>();
 
-app.use("*", cors({ origin: "*", allowMethods: ["GET", "POST", "OPTIONS"] }));
+app.use("*", cors({ origin: "*", allowMethods: ["GET", "POST", "DELETE", "OPTIONS"] }));
 
 function indexKey(userHash: string): string {
 	return `user-${userHash}-index`;
@@ -130,6 +130,25 @@ app.get("/saves/:hash/:uploadHash", async (c) => {
 	return new Response(await obj.arrayBuffer(), {
 		headers: { "Content-Type": "application/octet-stream" }
 	});
+});
+
+app.delete("/saves/:hash", async (c) => {
+	const userHash = c.req.param("hash");
+	if (!HASH_RE.test(userHash)) {
+		return c.json({ error: "invalid hash" }, 400);
+	}
+
+	// List by prefix rather than reading the index, so orphaned objects are removed too
+	let cursor: string | undefined;
+	do {
+		const listed = await c.env.SAVES.list({ prefix: `user-${userHash}-`, cursor });
+		if (listed.objects.length > 0) {
+			await c.env.SAVES.delete(listed.objects.map((o) => o.key));
+		}
+		cursor = listed.truncated ? listed.cursor : undefined;
+	} while (cursor);
+
+	return c.body(null, 204);
 });
 
 export default app;
