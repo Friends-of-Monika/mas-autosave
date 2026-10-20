@@ -7,9 +7,10 @@ MAX_VERSIONS = "20"
 MAX_AGE_DAYS = "30"
 MAX_BODY_MB = "2"
 
-[observability.logs]
-enabled = true
-invocation_logs = true
+# Disabled for privacy: persisted logs would record request URLs (user hash) and metadata.
+# Use `wrangler tail` for live debugging instead; it stores nothing.
+[observability]
+enabled = false
 
 [[r2_buckets]]
 binding = "SAVES"
