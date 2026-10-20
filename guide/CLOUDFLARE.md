@@ -1,5 +1,10 @@
 # 🌥️ Configuring Cloudflare backend
 
+> [!NOTE]
+> Before using our managed Cloudflare storage backend, please read the
+> [privacy policy](../legal/CLOUDFLARE_PRIVACY_POLICY.md), which explains
+> what data is stored and how to delete it.
+
 Cloudflare is the easiest (though has its tradeoffs &mdash; please read important info up ahead)
 way to store automated backups in Friends of Monika provided online storage. All it takes is
 for you to write down a unique key the submod will generate for you and keep it somewhere safe

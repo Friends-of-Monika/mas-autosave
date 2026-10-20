@@ -15,6 +15,7 @@
 	let deleteOpen = $state(false);
 	let deleting = $state(false);
 	let deleted = $state(false);
+	let copied = $state(false);
 
 	onMount(async () => {
 		try {
@@ -46,6 +47,16 @@
 		}
 	}
 
+	async function copyUserId() {
+		try {
+			await navigator.clipboard.writeText(userId);
+			copied = true;
+			setTimeout(() => (copied = false), 1500);
+		} catch (e) {
+			error = e instanceof Error ? e.message : String(e);
+		}
+	}
+
 	async function deleteAll() {
 		deleting = true;
 		error = null;
@@ -67,7 +78,12 @@
 		<button class="btn preset-outlined btn-sm" onclick={onBack}>← Back</button>
 		<div>
 			<h1 class="h1 text-2xl font-semibold tracking-tight">Saves</h1>
-			<p class="font-mono text-xs text-surface-600-400">{code}</p>
+			<p class="text-surface-600-400 flex items-baseline gap-3 font-mono text-xs">
+				<span>{code}</span>
+				<button class="hover:text-surface-950-50 cursor-pointer" onclick={copyUserId}>
+					{copied ? "Copied!" : "Copy user ID"}
+				</button>
+			</p>
 		</div>
 	</header>
 
